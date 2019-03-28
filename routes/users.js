@@ -18,9 +18,9 @@ module.exports = app => {
         try {
           const newUser = await user.save();
           res.send(201);
-          next();
+          return next();
         } catch (err) {
-          next(new errors.InternalError(err.message));
+          return next(new errors.InternalError(err.message));
         }
       });
     });
@@ -30,7 +30,7 @@ module.exports = app => {
   app.post("/auth", async (req, res, next) => {
     // check JSON content type
     if (!req.is("application/json")) {
-      next(new errors.InvalidContentError("Expects 'application/json'"));
+      return next(new errors.InvalidContentError("Expects 'application/json'"));
     }
 
     const { email, password } = req.body;
@@ -45,10 +45,10 @@ module.exports = app => {
       const { iat, exp } = jwt.decode(token);
       // respond with token
       res.send({ iat, exp, token });
-      next();
+      return next();
     } catch (err) {
       // unauthorized
-      next(new errors.UnauthorizedError(err));
+      return next(new errors.UnauthorizedError(err));
     }
   });
 };

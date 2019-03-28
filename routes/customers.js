@@ -9,9 +9,9 @@ module.exports = app => {
     try {
       const customers = await Customer.find({});
       res.send(customers);
-      next();
+      return next();
     } catch (err) {
-      next(new errors.InvalidContentError(err));
+      return next(new errors.InvalidContentError(err));
     }
   });
 
@@ -20,9 +20,9 @@ module.exports = app => {
     try {
       const customer = await Customer.findById(req.params.id);
       res.send(customer);
-      next();
+      return next();
     } catch (err) {
-      next(
+      return next(
         new errors.ResourceNotFoundError(
           `Customer id:${req.params.id} doesn't exist`
         )
@@ -37,7 +37,9 @@ module.exports = app => {
     async (req, res, next) => {
       // check JSON content type
       if (!req.is("application/json")) {
-        next(new errors.InvalidContentError("Expects 'application/json'"));
+        return next(
+          new errors.InvalidContentError("Expects 'application/json'")
+        );
       }
 
       const { name, email, balance } = req.body;
@@ -46,9 +48,9 @@ module.exports = app => {
       try {
         const newCustomer = await customer.save();
         res.send(201, newCustomer);
-        next();
+        return next();
       } catch (err) {
-        next(new errors.InternalError(err.message));
+        return next(new errors.InternalError(err.message));
       }
     }
   );
@@ -59,7 +61,9 @@ module.exports = app => {
     restjwt({ secret: process.env.JWT_SECRET }),
     async (req, res, next) => {
       if (!req.is("application/json")) {
-        next(new errors.InvalidContentError("Expexts 'application/json"));
+        return next(
+          new errors.InvalidContentError("Expexts 'application/json")
+        );
       }
 
       try {
@@ -68,9 +72,9 @@ module.exports = app => {
           req.body
         );
         res.send(200);
-        next();
+        return next();
       } catch (err) {
-        next(
+        return next(
           new errors.ResourceNotFoundError(
             `Customer id:${req.params.id} doesn't exist`
           )
@@ -87,9 +91,9 @@ module.exports = app => {
       try {
         const deletedCustomer = await Customer.findByIdAndRemove(req.params.id);
         res.send(204);
-        next();
+        return next();
       } catch (err) {
-        next(
+        return next(
           new errors.ResourceNotFoundError(
             `Customer id:${req.params.id} doesn't exist`
           )
