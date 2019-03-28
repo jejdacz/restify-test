@@ -1,0 +1,26 @@
+{
+  "name": "rest-test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodejs index.js",
+    "dev": "nodemon index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^1.18.10"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^7.0.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.4.20",
+    "mongoose-timestamp": "^0.6.0",
+    "restify": "^8.2.0",
+    "restify-errors": "^7.0.0",
+    "restify-jwt-community": "^1.0.11"
+  }
+}

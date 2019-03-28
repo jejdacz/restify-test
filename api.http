@@ -1,0 +1,40 @@
+GET http://localhost:5000/customers
+### Create customer
+POST http://localhost:5000/customers
+Content-Type: application/json
+Authorization: jwt eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YzlkMDlmMWNkNTc2OTQzZWFiYTIwNGEiLCJlbWFpbCI6ImpkQGdtLmNvbSIsInBhc3N3b3JkIjoiJDJhJDEwJGNHSEVLcWZXNmxjcUtDNFVDZUtzZGVCOGVmb3JJczFVLmpYMy92c0hSM1lMTkdVWEMxT1N5IiwiX192IjowLCJpYXQiOjE1NTM3OTU4MjQsImV4cCI6MTU4NTM1MzQyNH0.H8CprjKWQFtsZio0wR606nUiIEvxC_TieEAS8cmENYQ
+
+{
+    "name":"Jane Moose",
+    "email":"jd@gm.com",
+    "balance":"200"
+}
+###
+GET http://localhost:5000/customers/5c9cf45ae69ff928d096b825
+###
+PUT http://localhost:5000/customers/5c9cf45ae69ff928d096b825
+Content-Type: application/json
+
+{
+    "balance":"500"    
+}
+###
+DELETE http://localhost:5000/customers/5c9cf45ae69ff928d096b825
+
+### Register
+POST http://localhost:5000/register
+Content-Type: application/json
+
+{    
+    "email":"jd@gm.com",
+    "password":"1234"
+}
+
+### Authenticate
+POST http://localhost:5000/auth
+Content-Type: application/json
+
+{    
+    "email":"jd@gm.com",
+    "password":"1234"
+}
